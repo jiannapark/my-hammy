@@ -1,18 +1,22 @@
 const User = require('./user')
+const Hamster = require('./hamster')
+const Environment = require('./environment')
+const Food = require('./food')
+const Tracker = require('./tracker')
+const Diary = require('./diary')
 
-/**
- * If we had any associations to make, this would be a great place to put them!
- * ex. if we had another model called BlogPost, we might say:
- *
- *    BlogPost.belongsTo(User)
- */
+Hamster.hasMany(Environment)
+Environment.belongsTo(Hamster)
+Hamster.belongsToMany(Food, {through: Tracker})
+Food.belongsToMany(Hamster, {through: Tracker})
+Hamster.hasMany(Diary)
+Diary.belongsTo(Hamster)
 
-/**
- * We'll export all of our models here, so that any time a module needs a model,
- * we can just require it from 'db/models'
- * for example, we can say: const {User} = require('../db/models')
- * instead of: const User = require('../db/models/user')
- */
 module.exports = {
-  User
+  User,
+  Hamster,
+  Environment,
+  Food,
+  Tracker,
+  Diary
 }
