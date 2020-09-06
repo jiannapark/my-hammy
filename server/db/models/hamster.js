@@ -11,7 +11,7 @@ const Hamster = db.define('hamster', {
       'Syrian',
       'Robo',
       'Winter White',
-      "Campbell's",
+      "Campbell''s",
       'Chinese'
     ),
     allowNull: false

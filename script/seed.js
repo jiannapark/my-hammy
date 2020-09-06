@@ -1,24 +1,75 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {
+  User,
+  Hamster,
+  Environment,
+  Food,
+  Tracker,
+  Diary
+} = require('../server/db/models')
+
+async function seedUser() {
+  const users = await Promise.all([
+    User.create({email: 'jianna@email.com', password: '123'}),
+    User.create({email: 'brandon@email.com', password: '123'})
+  ])
+  return users
+}
+
+async function seedHamster() {
+  const hamsters = await Promise.all([
+    Hamster.create({
+      name: 'Pepper',
+      species: 'Winter White',
+      age: 0,
+      birthday: new Date('2020-07-30T17:20:30Z'),
+      image: '../public/images/apple-slice-1.jpg',
+      bio:
+        "Curious, feisty, and unbearably adorable, this little fella proves the wise saying: 'The way to a hamster's heart is through its stomach.'"
+    })
+  ])
+  return hamsters
+}
+
+// async function seedEnvironment() {}
+
+// async function seedFood() {}
+
+// async function seedTracker() {}
+
+async function seedDiary() {
+  const entries = await Promise.all([
+    Diary.create({
+      date: new Date('2020-08-30T17:20:30Z'),
+      content:
+        "Today I brought Pepper home. He's so tiny and precious! He roamed around the living room to get used to his new home. He also ate a bit of a blueberry. I hope I can provide for him the best life possible!"
+    }),
+    Diary.create({
+      date: new Date('2020-09-05T19:40:00Z'),
+      weather: 'Sunny',
+      content:
+        "Pepper didn't bite me today! To be more precise, he didn't succeed in biting me because I distracted him with treats. But really, as I was giving it a piece of carrot, he climbed onto my hands, and instead of biting my fingers he started climbing all over me! Brandon had to helped get him off my back because I was worried he might fall and get hurt."
+    })
+  ])
+  return entries
+}
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const users = await seedUser()
+  const hamsters = await seedHamster()
+  const entries = await seedDiary()
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${hamsters.length} hamsters`)
+  console.log(`seeded ${entries.length} entries`)
   console.log(`seeded successfully`)
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
@@ -33,12 +84,8 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
 if (module === require.main) {
   runSeed()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
