@@ -24,16 +24,20 @@ const Food = db.define('food', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  imageUrl: {
+    type: Sequelize.TEXT
+  },
   servingSizeMax: {
     type: Sequelize.FLOAT
   },
   servingUnit: {
-    type: Sequelize.ENUM('teaspoon', 'piece')
+    type: Sequelize.ENUM('cup', 'tablespoon', 'teaspoon', 'piece')
   },
   frequency: {
     type: Sequelize.ENUM(
       'daily',
       'every 1-2 days',
+      'every 2-3 days',
       'weekly',
       'bi-weekly',
       'every 1-2 weeks',

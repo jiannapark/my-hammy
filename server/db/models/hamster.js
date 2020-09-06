@@ -28,7 +28,7 @@ const Hamster = db.define('hamster', {
     type: Sequelize.DATEONLY,
     allowNull: false
   },
-  image: {
+  imageUrl: {
     type: Sequelize.TEXT
   },
   bio: {

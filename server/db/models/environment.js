@@ -3,7 +3,7 @@ const db = require('../db')
 
 const Environment = db.define('environment', {
   type: {
-    type: Sequelize.ENUM('enclosure', 'substrate', 'essential', 'ambience'),
+    type: Sequelize.ENUM('enclosure', 'substrate', 'essential', 'enrichment'),
     allowNull: false
   },
   brand: {
@@ -12,6 +12,9 @@ const Environment = db.define('environment', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  imageUrl: {
+    type: Sequelize.TEXT
   },
   size: {
     type: Sequelize.INTEGER
