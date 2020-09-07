@@ -24,7 +24,7 @@ export const gotSingleRecord = record => ({type: GET_SINGLE_RECORD, record})
 export const getSingleRecord = recordId => async dispatch => {
   try {
     const res = await axios.get(`/api/tracker/single/${recordId}`)
-    dispatch(gotRecords(res.data || initialState.selectedRecord))
+    dispatch(gotSingleRecord(res.data || initialState.selectedRecord))
   } catch (err) {
     console.error('There was a problem fetching single record!', err)
   }
@@ -58,7 +58,7 @@ export const updateRecord = (recordId, updateInfo) => async dispatch => {
 
 export const removedRecord = recordId => ({type: REMOVE_RECORD, recordId})
 
-export const removeRECORD = recordId => async dispatch => {
+export const removeRecord = recordId => async dispatch => {
   try {
     await axios.delete(`/api/tracker/${recordId}`)
     dispatch(removedRecord(recordId))
@@ -67,7 +67,7 @@ export const removeRECORD = recordId => async dispatch => {
   }
 }
 
-export default function environmentReducer(state = initialState, action) {
+export default function trackerReducer(state = initialState, action) {
   switch (action.type) {
     case GET_RECORDS:
       return {...state, loading: false, records: action.records}

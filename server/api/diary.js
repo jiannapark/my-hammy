@@ -15,6 +15,15 @@ router.get('/:hamsterId', async (req, res, next) => {
   }
 })
 
+router.get('/single/:entryId', async (req, res, next) => {
+  try {
+    const diaryEntry = await Diary.findById(req.params.entryId)
+    res.json(diaryEntry)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/:hamsterId', async (req, res, next) => {
   try {
     const newEntry = await Diary.create({

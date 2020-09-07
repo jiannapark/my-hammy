@@ -24,7 +24,7 @@ export const gotSingleItem = item => ({type: GET_SINGLE_ITEM, item})
 export const getSingleItem = itemId => async dispatch => {
   try {
     const res = await axios.get(`/api/environment/single/${itemId}`)
-    dispatch(gotItems(res.data || initialState.selectedItem))
+    dispatch(gotSingleItem(res.data || initialState.selectedItem))
   } catch (err) {
     console.error('There was a problem fetching single item!', err)
   }
