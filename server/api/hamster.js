@@ -11,7 +11,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-router.get('/:userId/:hamsterId', async (req, res, next) => {
+router.get('/single/:hamsterId', async (req, res, next) => {
   try {
     const hamster = await Hamster.findById(req.params.hamsterId)
     res.json(hamster)

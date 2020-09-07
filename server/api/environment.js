@@ -13,6 +13,15 @@ router.get('/:hamsterId', async (req, res, next) => {
   }
 })
 
+router.get('/single/:itemId', async (req, res, next) => {
+  try {
+    const singleEnvironmentItem = await Environment.findById(req.params.itemId)
+    res.json(singleEnvironmentItem)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/:hamsterId', async (req, res, next) => {
   try {
     const newEnvironment = await Environment.create({
