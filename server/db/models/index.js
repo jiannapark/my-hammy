@@ -5,6 +5,8 @@ const Food = require('./food')
 const Tracker = require('./tracker')
 const Diary = require('./diary')
 
+User.hasMany(Hamster)
+Hamster.belongsTo(User)
 Hamster.hasMany(Environment)
 Environment.belongsTo(Hamster)
 Hamster.belongsToMany(Food, {through: Tracker})

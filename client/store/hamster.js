@@ -10,9 +10,9 @@ const initialState = {loading: true, hamsters: [], singleHamster: {}}
 
 export const gotHamsters = hamsters => ({type: GET_HAMSTERS, hamsters})
 
-export const getHamsters = () => async dispatch => {
+export const getHamsters = userId => async dispatch => {
   try {
-    const res = await axios.get('/api/hamster')
+    const res = await axios.get(`/api/hamster/${userId}`)
     dispatch(gotHamsters(res.data || initialState.hamsters))
   } catch (err) {
     console.error('There was a problem fetching hamsters!', err)
@@ -26,7 +26,7 @@ export const gotSingleHamster = hamster => ({
 
 export const getSingleHamster = hamsterId => async dispatch => {
   try {
-    const res = await axios.get(`/api/hamster/${hamsterId}`)
+    const res = await axios.get(`/api/hamster/:userId/${hamsterId}`)
     dispatch(gotSingleHamster(res.data || initialState.singleHamster))
   } catch (err) {
     console.error('There was a problem fetching a hamster!', err)

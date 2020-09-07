@@ -2,29 +2,41 @@ const router = require('express').Router()
 const {Hamster} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/:userId', async (req, res, next) => {
   try {
-    const hamsters = await Hamster.findAll()
+    const hamsters = await Hamster.findAll({where: {userId: req.params.userId}})
     res.json(hamsters)
   } catch (err) {
     next(err)
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.get('/:userId/:hamsterId', async (req, res, next) => {
   try {
-    const newHamster = await Hamster.create(req.body)
+    const hamster = await Hamster.findById(req.params.hamsterId)
+    res.json(hamster)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/:userId', async (req, res, next) => {
+  try {
+    const newHamster = await Hamster.create({
+      ...req.body,
+      userId: req.params.userId
+    })
     res.status(201).json(newHamster)
   } catch (err) {
     next(err)
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:hamsterId', async (req, res, next) => {
   try {
     const hamsterToUpdate = await Hamster.update(req.body, {
       where: {
-        id: req.params.id
+        id: req.params.hamsterId
       }
     })
     if (hamsterToUpdate) {
@@ -38,11 +50,11 @@ router.put('/:id', async (req, res, next) => {
 })
 
 // :(
-router.delete(':id', async (req, res, next) => {
+router.delete(':hamsterId', async (req, res, next) => {
   try {
     const hamsterToDelete = await Hamster.destroy({
       where: {
-        id: req.params.id
+        id: req.params.hamsterId
       }
     })
     if (hamsterToDelete) {
