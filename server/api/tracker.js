@@ -15,6 +15,15 @@ router.get('/:hamsterId', async (req, res, next) => {
   }
 })
 
+router.get('/single/:recordId', async (req, res, next) => {
+  try {
+    const record = await Tracker.findById(req.params.recordId)
+    res.json(record)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/:hamsterId', async (req, res, next) => {
   try {
     const newRecord = await Tracker.create({
