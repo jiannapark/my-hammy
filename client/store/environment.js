@@ -71,6 +71,8 @@ export default function environmentReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ITEMS:
       return {...state, loading: false, items: action.items}
+    case GET_SINGLE_ITEM:
+      return {...state, loading: false, selectedItem: action.selectedItem}
     case ADD_ITEM:
       return {
         ...state,
