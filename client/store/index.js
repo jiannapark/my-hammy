@@ -4,8 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import hamsterReducer from './hamster'
+import environmentReducer from './environment'
 
-const reducer = combineReducers({user, hamsterReducer})
+const reducer = combineReducers({user, hamsterReducer, environmentReducer})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
