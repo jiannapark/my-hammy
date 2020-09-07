@@ -4,12 +4,12 @@ module.exports = router
 
 router.get('/:hamsterId', async (req, res, next) => {
   try {
-    const tracks = await Tracker.findAll({
+    const records = await Tracker.findAll({
       where: {
         hamsterId: req.params.hamsterId
       }
     })
-    res.json(tracks)
+    res.json(records)
   } catch (err) {
     next(err)
   }
@@ -17,11 +17,11 @@ router.get('/:hamsterId', async (req, res, next) => {
 
 router.post('/:hamsterId', async (req, res, next) => {
   try {
-    const newTrack = await Tracker.create({
+    const newRecord = await Tracker.create({
       ...req.body,
       hamsterId: req.params.hamsterId
     })
-    res.status(201).json(newTrack)
+    res.status(201).json(newRecord)
   } catch (err) {
     next(err)
   }
@@ -29,13 +29,13 @@ router.post('/:hamsterId', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const trackToUpdate = await Tracker.update(req.body, {
+    const recordToUpdate = await Tracker.update(req.body, {
       where: {
         id: req.params.id
       }
     })
-    if (trackToUpdate) {
-      res.status(200).json(trackToUpdate)
+    if (recordToUpdate) {
+      res.status(200).json(recordToUpdate)
     } else {
       res.sendStatus(404)
     }
@@ -46,12 +46,12 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete(':id', async (req, res, next) => {
   try {
-    const trackToDelete = await Tracker.destroy({
+    const recordToDelete = await Tracker.destroy({
       where: {
         id: req.params.id
       }
     })
-    if (trackToDelete) {
+    if (recordToDelete) {
       res.sendStatus(204)
     } else {
       res.sendStatus(404)
