@@ -7,13 +7,15 @@ import hamsterReducer from './hamster'
 import environmentReducer from './environment'
 import foodReducer from './food'
 import trackerReducer from './tracker'
+import diaryReducer from './diary'
 
 const reducer = combineReducers({
   user,
   hamsterReducer,
   environmentReducer,
   foodReducer,
-  trackerReducer
+  trackerReducer,
+  diaryReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
