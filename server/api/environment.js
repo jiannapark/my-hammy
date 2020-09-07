@@ -2,18 +2,23 @@ const router = require('express').Router()
 const {Environment} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/:hamsterId', async (req, res, next) => {
   try {
-    const environmentItems = await Environment.findAll()
+    const environmentItems = await Environment.findAll({
+      where: {hamsterId: req.params.hamsterId}
+    })
     res.json(environmentItems)
   } catch (err) {
     next(err)
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/:hamsterId', async (req, res, next) => {
   try {
-    const newEnvironment = await Environment.create(req.body)
+    const newEnvironment = await Environment.create({
+      ...req.body,
+      hamsterId: req.params.hamsterId
+    })
     res.status(201).json(newEnvironment)
   } catch (err) {
     next(err)
