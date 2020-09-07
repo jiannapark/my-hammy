@@ -1,11 +1,12 @@
 import axios from 'axios'
 
 const GET_ITEMS = 'GET_ITEMS'
+const GET_SINGLE_ITEM = 'GET_SINGLE_ITEM'
 const ADD_ITEM = 'ADD_ITEM'
 const UPDATE_ITEM = 'UPDATE_ITEM'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 
-const initialState = {loading: true, items: []}
+const initialState = {loading: true, items: [], singleItem: {}}
 
 export const gotItems = items => ({type: GET_ITEMS, items})
 
@@ -15,6 +16,17 @@ export const getItems = hamsterId => async dispatch => {
     dispatch(gotItems(res.data || initialState.items))
   } catch (err) {
     console.error('There was a problem fetching items!', err)
+  }
+}
+
+export const gotSingleItem = item => ({type: GET_SINGLE_ITEM, item})
+
+export const getSingleItem = itemId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/environment/single/${itemId}`)
+    dispatch(gotItems(res.data || initialState.singleItem))
+  } catch (err) {
+    console.error('There was a problem fetching single item!', err)
   }
 }
 

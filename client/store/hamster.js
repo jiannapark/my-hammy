@@ -26,7 +26,7 @@ export const gotSingleHamster = hamster => ({
 
 export const getSingleHamster = hamsterId => async dispatch => {
   try {
-    const res = await axios.get(`/api/hamster/:userId/${hamsterId}`)
+    const res = await axios.get(`/api/hamster/single/${hamsterId}`)
     dispatch(gotSingleHamster(res.data || initialState.singleHamster))
   } catch (err) {
     console.error('There was a problem fetching a hamster!', err)
@@ -35,9 +35,9 @@ export const getSingleHamster = hamsterId => async dispatch => {
 
 export const addedHamster = hamster => ({type: ADD_HAMSTER, hamster})
 
-export const addHamster = hamsterInfo => async dispatch => {
+export const addHamster = (userId, hamsterInfo) => async dispatch => {
   try {
-    const res = await axios.post('/api/hamster', hamsterInfo)
+    const res = await axios.post(`/api/hamster/${userId}`, hamsterInfo)
     dispatch(addedHamster(res.data))
   } catch (err) {
     console.error('There was a problem creating a new hamster!', err)
@@ -86,7 +86,7 @@ export default function hamsterReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        singleHamster: {},
+        singleHamster: {...state.singleHamster, ...action.updateInfo},
         hamsters: [...state.hamsters].map(hamster => {
           if (hamster.id === action.hamsterId) {
             return {...hamster, ...action.updateInfo}
