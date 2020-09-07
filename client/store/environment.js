@@ -6,7 +6,7 @@ const ADD_ITEM = 'ADD_ITEM'
 const UPDATE_ITEM = 'UPDATE_ITEM'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 
-const initialState = {loading: true, items: [], singleItem: {}}
+const initialState = {loading: true, items: [], selectedItem: {}}
 
 export const gotItems = items => ({type: GET_ITEMS, items})
 
@@ -24,7 +24,7 @@ export const gotSingleItem = item => ({type: GET_SINGLE_ITEM, item})
 export const getSingleItem = itemId => async dispatch => {
   try {
     const res = await axios.get(`/api/environment/single/${itemId}`)
-    dispatch(gotItems(res.data || initialState.singleItem))
+    dispatch(gotItems(res.data || initialState.selectedItem))
   } catch (err) {
     console.error('There was a problem fetching single item!', err)
   }
@@ -81,6 +81,7 @@ export default function environmentReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        selectedItem: {...state.selectedItem, ...action.updateInfo},
         items: [...state.items].map(item => {
           if (item.id === action.itemId) {
             return {...item, ...action.updateInfo}

@@ -6,7 +6,7 @@ const ADD_HAMSTER = 'ADD_HAMSTER'
 const UPDATE_HAMSTER = 'UPDATE_HAMSTER'
 const REMOVE_HAMSTER = 'REMOVE_HAMSTER'
 
-const initialState = {loading: true, hamsters: [], singleHamster: {}}
+const initialState = {loading: true, hamsters: [], selectedHamster: {}}
 
 export const gotHamsters = hamsters => ({type: GET_HAMSTERS, hamsters})
 
@@ -27,7 +27,7 @@ export const gotSingleHamster = hamster => ({
 export const getSingleHamster = hamsterId => async dispatch => {
   try {
     const res = await axios.get(`/api/hamster/single/${hamsterId}`)
-    dispatch(gotSingleHamster(res.data || initialState.singleHamster))
+    dispatch(gotSingleHamster(res.data || initialState.selectedHamster))
   } catch (err) {
     console.error('There was a problem fetching a hamster!', err)
   }
@@ -75,7 +75,7 @@ export default function hamsterReducer(state = initialState, action) {
     case GET_HAMSTERS:
       return {...state, loading: false, hamsters: action.hamsters}
     case GET_SINGLE_HAMSTER:
-      return {...state, loading: false, singleHamster: action.hamster}
+      return {...state, loading: false, selectedHamster: action.hamster}
     case ADD_HAMSTER:
       return {
         ...state,
@@ -86,7 +86,7 @@ export default function hamsterReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        singleHamster: {...state.singleHamster, ...action.updateInfo},
+        selectedHamster: {...state.selectedHamster, ...action.updateInfo},
         hamsters: [...state.hamsters].map(hamster => {
           if (hamster.id === action.hamsterId) {
             return {...hamster, ...action.updateInfo}

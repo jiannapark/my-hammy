@@ -6,7 +6,7 @@ const ADD_FOOD = 'ADD_FOOD'
 const UPDATE_FOOD = 'UPDATE_FOOD'
 const REMOVE_FOOD = 'REMOVE_FOOD'
 
-const initialState = {loading: true, allFood: [], singleFood: {}}
+const initialState = {loading: true, allFood: [], selectedFood: {}}
 
 export const gotAllFood = allFood => ({type: GET_ALL_FOOD, allFood})
 
@@ -19,15 +19,15 @@ export const getAllFood = () => async dispatch => {
   }
 }
 
-export const gotSingleFood = singleFood => ({
+export const gotSingleFood = selectedFood => ({
   type: GET_SINGLE_FOOD,
-  singleFood
+  selectedFood
 })
 
 export const getSingleFood = foodId => async dispatch => {
   try {
     const res = await axios.get(`/api/food/${foodId}`)
-    dispatch(gotSingleFood(res.data || initialState.singleFood))
+    dispatch(gotSingleFood(res.data || initialState.selectedFood))
   } catch (err) {
     console.error('There was a problem fetching a food item!', err)
   }
@@ -75,7 +75,7 @@ export default function foodReducer(state = initialState, action) {
     case GET_ALL_FOOD:
       return {...state, loading: false, allFood: action.allFood}
     case GET_SINGLE_FOOD:
-      return {...state, loading: false, singleFood: action.singleFood}
+      return {...state, loading: false, selectedFood: action.selectedFood}
     case ADD_FOOD:
       return {
         ...state,
@@ -86,7 +86,7 @@ export default function foodReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        singleFood: {...state.singleFood, ...action.updateInfo},
+        selectedFood: {...state.selectedFood, ...action.updateInfo},
         allFood: [...state.allFood].map(food => {
           if (food.id === action.foodId) {
             return {...food, ...action.updateInfo}
