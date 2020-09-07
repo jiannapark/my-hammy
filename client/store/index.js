@@ -5,8 +5,14 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import hamsterReducer from './hamster'
 import environmentReducer from './environment'
+import foodReducer from './food'
 
-const reducer = combineReducers({user, hamsterReducer, environmentReducer})
+const reducer = combineReducers({
+  user,
+  hamsterReducer,
+  environmentReducer,
+  foodReducer
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
