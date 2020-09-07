@@ -99,8 +99,8 @@ async function seedEnvironment() {
     }
   ]
 
-  const environments = await Environment.bulkCreate(environmentList)
-  return environments
+  const environmentItems = await Environment.bulkCreate(environmentList)
+  return environmentItems
 }
 
 async function seedFood() {
@@ -177,8 +177,8 @@ async function seedFood() {
     }
   ]
 
-  const foods = await Food.bulkCreate(foodList)
-  return foods
+  const foodItems = await Food.bulkCreate(foodList)
+  return foodItems
 }
 
 // async function seedTracker() {
@@ -211,15 +211,15 @@ async function seed() {
 
   const users = await seedUser()
   const hamsters = await seedHamster()
-  const environments = await seedEnvironment()
-  const foods = await seedFood()
+  const environmentItems = await seedEnvironment()
+  const foodItems = await seedFood()
   // const trackers = await seedTracker()
   const entries = await seedDiary()
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${hamsters.length} hamsters`)
-  console.log(`seeded ${environments.length} environment items`)
-  console.log(`seeded ${foods.length} food items`)
+  console.log(`seeded ${environmentItems.length} environment items`)
+  console.log(`seeded ${foodItems.length} food items`)
   // console.log(`seeded ${trackers.length} food tracker entries`)
   console.log(`seeded ${entries.length} diary entries`)
   console.log(`seeded successfully`)
