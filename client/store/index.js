@@ -3,19 +3,19 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import hamsterReducer from './hamster'
-import environmentReducer from './environment'
-import foodReducer from './food'
-import trackerReducer from './tracker'
-import diaryReducer from './diary'
+import hamster from './hamster'
+import environment from './environment'
+import food from './food'
+import tracker from './tracker'
+import diary from './diary'
 
 const reducer = combineReducers({
   user,
-  hamsterReducer,
-  environmentReducer,
-  foodReducer,
-  trackerReducer,
-  diaryReducer
+  hamster,
+  environment,
+  food,
+  tracker,
+  diary
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
