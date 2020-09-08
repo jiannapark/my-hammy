@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getHamsters} from '../store/hamster'
 
 export class UserHome extends React.Component {
@@ -17,10 +18,10 @@ export class UserHome extends React.Component {
         <div>
           Here are your hamsters:
           {hamsters.map(hamster => (
-            <div key={hamster.id}>
+            <Link to={`/hamster/${hamster.id}`} key={hamster.id}>
               <h5>{hamster.name}</h5>
               <img src={hamster.imageUrl} width="200" />
-            </div>
+            </Link>
           ))}
         </div>
       </div>
