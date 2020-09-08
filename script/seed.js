@@ -25,9 +25,10 @@ async function seedHamster() {
       species: 'Winter White',
       age: 0,
       birthday: new Date('2020-07-30T17:20:30Z'),
-      image: '../public/images/apple-slice-1.jpg',
+      imageUrl: 'images/apple-slice-1.jpg',
       bio:
-        "Curious, feisty, and unbearably adorable, this little fella proves the wise saying: 'The way to a hamster's heart is through its stomach.'"
+        "Curious, feisty, and unbearably adorable, this little fella proves the wise saying: 'The way to a hamster's heart is through its stomach.'",
+      userId: 1
     }
   ])
   return hamsters

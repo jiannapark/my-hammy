@@ -1,34 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {getHamsters} from '../store/hamster'
 
-/**
- * COMPONENT
- */
-export const UserHome = props => {
-  const {email} = props
+export class UserHome extends React.Component {
+  componentDidMount() {
+    this.props.getHamsters(this.props.userId)
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
-}
+  render() {
+    const {email, hamsters} = this.props
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    email: state.user.email
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
+        <div>
+          Here are your hamsters:
+          {hamsters.map(hamster => (
+            <div key={hamster.id}>
+              <h5>{hamster.name}</h5>
+              <img src={hamster.imageUrl} width="200" />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapState = state => {
+  return {
+    userId: state.user.id,
+    email: state.user.email,
+    hamsters: state.hamster.hamsters
+  }
+}
 
-/**
- * PROP TYPES
- */
+const mapDispatch = dispatch => {
+  return {
+    getHamsters: userId => dispatch(getHamsters(userId))
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
+
 UserHome.propTypes = {
   email: PropTypes.string
 }
