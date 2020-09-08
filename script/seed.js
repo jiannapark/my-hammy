@@ -138,7 +138,7 @@ async function seedFood() {
     },
     {
       type: 'treat',
-      brand: 'Ware Manufacturing',
+      brand: 'Ware',
       name: 'Rice Pops',
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/81FEpwi3sFL._AC_SL1500_.jpg',
