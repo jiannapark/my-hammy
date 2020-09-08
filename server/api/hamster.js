@@ -13,7 +13,7 @@ router.get('/:userId', async (req, res, next) => {
 
 router.get('/single/:hamsterId', async (req, res, next) => {
   try {
-    const hamster = await Hamster.findById(req.params.hamsterId)
+    const hamster = await Hamster.findByPk(req.params.hamsterId)
     res.json(hamster)
   } catch (err) {
     next(err)

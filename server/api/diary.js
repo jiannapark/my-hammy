@@ -17,7 +17,7 @@ router.get('/:hamsterId', async (req, res, next) => {
 
 router.get('/single/:entryId', async (req, res, next) => {
   try {
-    const diaryEntry = await Diary.findById(req.params.entryId)
+    const diaryEntry = await Diary.findByPk(req.params.entryId)
     res.json(diaryEntry)
   } catch (err) {
     next(err)
