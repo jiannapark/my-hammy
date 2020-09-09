@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Tracker} = require('../db/models')
+const {Tracker, Food} = require('../db/models')
 module.exports = router
 
 router.get('/:hamsterId', async (req, res, next) => {
@@ -7,6 +7,9 @@ router.get('/:hamsterId', async (req, res, next) => {
     const records = await Tracker.findAll({
       where: {
         hamsterId: req.params.hamsterId
+      },
+      include: {
+        model: [Food]
       }
     })
     res.json(records)

@@ -15,8 +15,10 @@ export class Hamster extends React.Component {
       <div>
         <h3>{hamster.name}</h3>
         {/* TODO: imageUrl as absolute path */}
-        <img src={hamster.imageUrl} width="400" />
+        <img src="/images/apple-slice-2.jpg" width="400" />
         <h5>Species: {hamster.species}</h5>
+
+        {/* Environment, Nutrition Tracker & Diary */}
       </div>
     )
   }
