@@ -20,7 +20,7 @@ export class Hamster extends React.Component {
         <h5>Species: {hamster.species}</h5>
 
         {/* Environment, Nutrition Tracker & Diary */}
-        <Tracker />
+        <Tracker hamster={hamster} />
       </div>
     )
   }

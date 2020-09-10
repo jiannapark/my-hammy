@@ -25,6 +25,14 @@ const foodTypes = [
 export class TrackerList extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      type: '',
+      brand: '',
+      name: '',
+      quantity: 0,
+      datetime: ''
+    }
+    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -32,13 +40,22 @@ export class TrackerList extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.getRecords()
+    this.props.getRecords()
     this.props.getAllFood()
   }
 
-  handleSubmit(evt) {
+  handleChange(evt) {
     evt.preventDefault()
-    this.props.addRecord()
+    this.setState({
+      [evt.target.name]: evt.target.value
+    })
+  }
+
+  handleSubmit(evt) {
+    const hamster = this.props.hamster
+    evt.preventDefault()
+    // bug: error adding a new record
+    this.props.addRecord(hamster.id, {...this.state, hamsterId: hamster.id})
   }
 
   handleAdd(evt) {
@@ -58,6 +75,7 @@ export class TrackerList extends React.Component {
 
   render() {
     const {allFood, records} = this.props
+    const {type, brand, name, quantity, datetime} = this.state
 
     const brands = Array.from(new Set(allFood.map(food => food.brand)))
     const names = Array.from(new Set(allFood.map(food => food.name)))
@@ -75,9 +93,14 @@ export class TrackerList extends React.Component {
             <label htmlFor="type">
               <small>Type</small>
             </label>
-            <select name="type">
+            <select required name="type">
               {foodTypes.map(foodType => (
-                <option id="type" key={foodType} value={foodType}>
+                <option
+                  id="type"
+                  key={foodType}
+                  value={foodType}
+                  onChange={this.handleChange}
+                >
                   {foodType}
                 </option>
               ))}
@@ -87,9 +110,14 @@ export class TrackerList extends React.Component {
             <label htmlFor="brand">
               <small>Brand</small>
             </label>
-            <select name="brand">
+            <select required name="brand">
               {brands.map(brand => (
-                <option id="brand" key={brand} value={brand}>
+                <option
+                  id="brand"
+                  key={brand}
+                  value={brand}
+                  onChange={this.handleChange}
+                >
                   {brand}
                 </option>
               ))}
@@ -99,16 +127,51 @@ export class TrackerList extends React.Component {
             <label htmlFor="name">
               <small>Name</small>
             </label>
-            <select name="name">
+            <select required name="name">
               {names.map(name => (
-                <option id="name" key={name} value={name}>
+                <option
+                  id="name"
+                  key={name}
+                  value={name}
+                  onChange={this.handleChange}
+                >
                   {name}
                 </option>
               ))}
             </select>
           </div>
-          <div>{/* quantity */}</div>
-          <div>{/* time/date */}</div>
+          <div>
+            <label htmlFor="quantity">
+              <small>Quantity</small>
+            </label>
+            <input
+              required
+              type="number"
+              id="quantity"
+              name="quantity"
+              onChange={this.handleChange}
+              value={quantity}
+              min="0"
+              step=".01"
+              placeholder="0"
+            />
+          </div>
+          <div>
+            {/* bug: no change on change */}
+            <label htmlFor="datetime">
+              <small>Feeding Time</small>
+            </label>
+            <input
+              required
+              type="datetime-local"
+              id="datetime"
+              name="datetime"
+              onChange={this.handleChange}
+              value="2020-09-10T19:30"
+              min="2018-06-07T00:00"
+              max="2025-06-14T00:00"
+            />
+          </div>
           <div>
             <button type="submit">Add</button>
           </div>
