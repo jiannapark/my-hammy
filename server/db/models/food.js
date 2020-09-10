@@ -4,18 +4,18 @@ const db = require('../db')
 const Food = db.define('food', {
   type: {
     type: Sequelize.ENUM(
-      'pellet',
-      'vegetable',
-      'fruit',
-      'grain',
-      'legume',
-      'nut',
-      'seed',
-      'protein',
-      'treat',
-      'other'
+      'Pellet',
+      'Vegetable',
+      'Fruit',
+      'Grain',
+      'Legume',
+      'Nut',
+      'Seed',
+      'Protein',
+      'Treat',
+      'Other'
     ),
-    defaultValue: 'other'
+    defaultValue: 'Other'
   },
   brand: {
     type: Sequelize.STRING
@@ -35,16 +35,16 @@ const Food = db.define('food', {
   },
   frequency: {
     type: Sequelize.ENUM(
-      'daily',
-      'every 1-2 days',
-      'every 2-3 days',
-      'weekly',
-      'bi-weekly',
-      'every 1-2 weeks',
+      'Daily',
+      'Every 1-2 days',
+      'Every 2-3 days',
+      'Weekly',
+      'Bi-weekly',
+      'Every 1-2 weeks',
       '1-2 times a week',
       '2 times a week',
       '2-3 times a week',
-      'monthly',
+      'Monthly',
       '1-2 times a month'
     )
   }
