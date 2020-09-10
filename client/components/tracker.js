@@ -9,19 +9,6 @@ import {
   removeRecord
 } from '../store/tracker'
 
-const foodTypes = [
-  'Pellet',
-  'Vegetable',
-  'Fruit',
-  'Grain',
-  'Legume',
-  'Nut',
-  'Seed',
-  'Protein',
-  'Treat',
-  'Other'
-]
-
 export class TrackerList extends React.Component {
   constructor(props) {
     super(props)
@@ -77,8 +64,8 @@ export class TrackerList extends React.Component {
     const {allFood, records} = this.props
     const {type, brand, name, quantity, datetime} = this.state
 
-    const brands = Array.from(new Set(allFood.map(food => food.brand)))
-    const names = Array.from(new Set(allFood.map(food => food.name)))
+    const items = allFood.map(food => `${food.brand} ${food.name}`).sort()
+    // const names = Array.from(new Set(allFood.map((food) => food.name))).sort()
 
     return (
       <div>
@@ -90,55 +77,43 @@ export class TrackerList extends React.Component {
 
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label htmlFor="type">
-              <small>Type</small>
+            {/* bug: no change on change */}
+            <label htmlFor="datetime">
+              <small>Time</small>
             </label>
-            <select required name="type">
-              {foodTypes.map(foodType => (
-                <option
-                  id="type"
-                  key={foodType}
-                  value={foodType}
-                  onChange={this.handleChange}
-                >
-                  {foodType}
-                </option>
-              ))}
-            </select>
+            <input
+              required
+              type="datetime-local"
+              id="datetime"
+              name="datetime"
+              onChange={this.handleChange}
+              value="2020-09-10T19:30"
+              min="2018-06-07T00:00"
+              max="2025-06-14T00:00"
+            />
           </div>
           <div>
-            <label htmlFor="brand">
-              <small>Brand</small>
+            <label htmlFor="item">
+              <small>Item</small>
             </label>
-            <select required name="brand">
-              {brands.map(brand => (
-                <option
-                  id="brand"
-                  key={brand}
-                  value={brand}
-                  onChange={this.handleChange}
-                >
-                  {brand}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="name">
-              <small>Name</small>
-            </label>
-            <select required name="name">
-              {names.map(name => (
+            <input
+              list="items"
+              name="item"
+              id="item"
+              placeholder="Essentials Hamster & Gerbil Food"
+            />
+            <datalist id="items">
+              {items.map(item => (
                 <option
                   id="name"
-                  key={name}
-                  value={name}
+                  key={item}
+                  value={item}
                   onChange={this.handleChange}
                 >
-                  {name}
+                  {item}
                 </option>
               ))}
-            </select>
+            </datalist>
           </div>
           <div>
             <label htmlFor="quantity">
@@ -154,22 +129,6 @@ export class TrackerList extends React.Component {
               min="0"
               step=".01"
               placeholder="0"
-            />
-          </div>
-          <div>
-            {/* bug: no change on change */}
-            <label htmlFor="datetime">
-              <small>Feeding Time</small>
-            </label>
-            <input
-              required
-              type="datetime-local"
-              id="datetime"
-              name="datetime"
-              onChange={this.handleChange}
-              value="2020-09-10T19:30"
-              min="2018-06-07T00:00"
-              max="2025-06-14T00:00"
             />
           </div>
           <div>

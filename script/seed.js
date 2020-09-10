@@ -177,7 +177,7 @@ async function seedFood() {
     },
     {
       type: 'Grain',
-      brand: "Brown''s Tropical Carnival",
+      brand: "Brown's Tropical Carnival",
       name: 'Natural Wheat Sprays',
       imageUrl:
         'https://images-na.ssl-images-amazon.com/images/I/81s-3wx055L._AC_SL1500_.jpg',
