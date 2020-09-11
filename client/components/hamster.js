@@ -11,6 +11,7 @@ export class Hamster extends React.Component {
 
   render() {
     const {hamster} = this.props
+    console.log('hamster', hamster)
 
     return (
       <div>

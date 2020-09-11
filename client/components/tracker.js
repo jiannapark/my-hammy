@@ -23,7 +23,8 @@ export class TrackerList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRecords()
+    console.log(this.props)
+    this.props.getRecords(this.props.hamster.id)
     this.props.getAllFood()
   }
 
@@ -35,8 +36,8 @@ export class TrackerList extends React.Component {
   }
 
   handleSubmit(evt) {
-    const hamster = this.props.hamster
     evt.preventDefault()
+    const hamster = this.props.hamster
     // bug: error adding a new record
     this.props.addRecord(hamster.id, {...this.state, hamsterId: hamster.id})
   }

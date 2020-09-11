@@ -1,8 +1,14 @@
 import React from 'react'
+import Select from 'react-select'
 
 export const TrackerForm = props => {
   const {foodItems, recordInfo, handleChange, handleSubmit} = props
   const {datetime, foodId, quantity} = recordInfo
+
+  const foodItemOptions = foodItems.map(item => ({
+    value: item.id,
+    label: item.brand + ' ' + item.name
+  }))
 
   return (
     <form onSubmit={handleSubmit}>
@@ -22,11 +28,24 @@ export const TrackerForm = props => {
           max="2025-06-14T00:00"
         />
       </div>
-      <div>
+      <div style={{display: 'block', width: '80%'}}>
         <label htmlFor="item">
           <small>Item</small>
         </label>
-        <input
+        <Select name="item" onChange={handleChange} options={foodItemOptions} />
+        {/* <select
+          className="search-select"
+          name="item"
+          onChange={handleChange}
+          // placeholder="Select..."
+        >
+          {foodItems.map((item) => (
+            <option id="item" key={item.id} value={item.id}>
+              {`${item.brand} ${item.name}`}
+            </option>
+          ))}
+        </select> */}
+        {/* <input
           list="items"
           name="item"
           id="item"
@@ -34,12 +53,12 @@ export const TrackerForm = props => {
           placeholder="Select..."
         />
         <datalist id="items">
-          {foodItems.map(item => (
-            <option id="item" value={item.id}>
+          {foodItems.map((item) => (
+            <option id="item" key={item.id} value={item.id}>
               {`${item.brand} ${item.name}`}
             </option>
           ))}
-        </datalist>
+        </datalist> */}
       </div>
       <div>
         <label htmlFor="quantity">
