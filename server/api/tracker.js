@@ -7,12 +7,18 @@ router.get('/:hamsterId', async (req, res, next) => {
     const records = await Tracker.findAll({
       where: {
         hamsterId: req.params.hamsterId
-      },
-      include: {
-        model: [Food]
       }
+      // include: Food,
     })
-    res.json(records)
+    const includeFood = records.map(record =>
+      Food.findOne({where: {id: record.foodId}})
+    )
+    const foundFood = await Promise.all(includeFood)
+    const recordsWithFood = records.map((record, idx) => {
+      record.dataValues.food = foundFood[idx]
+      return record
+    })
+    res.json(recordsWithFood)
   } catch (err) {
     next(err)
   }
