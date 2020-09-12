@@ -7,8 +7,9 @@ import {getRecords} from '../store/tracker'
 
 export class Hamster extends React.Component {
   componentDidMount() {
-    this.props.getSingleHamster(this.props.match.params.id)
-    this.props.getRecords(this.props.match.params.id)
+    const hamsterId = this.props.match.params.id
+    this.props.getSingleHamster(hamsterId)
+    this.props.getRecords(hamsterId)
   }
 
   render() {

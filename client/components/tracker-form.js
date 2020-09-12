@@ -3,9 +3,13 @@ import Select from 'react-select'
 
 export const TrackerForm = props => {
   const {foodItems, recordInfo, handleChange, handleSubmit} = props
-  const {datetime, foodId, quantity} = recordInfo
+  const {datetime, quantity} = recordInfo
 
   const foodItemOptions = foodItems.map(item => ({
+    target: {
+      name: 'foodId',
+      value: item.id
+    },
     value: item.id,
     label: item.brand + ' ' + item.name
   }))

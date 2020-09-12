@@ -22,8 +22,6 @@ export class TrackerList extends React.Component {
   }
 
   handleChange(evt) {
-    // bug: not a function
-    evt.preventDefault()
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -32,8 +30,12 @@ export class TrackerList extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault()
     const hamster = this.props.hamster
-    // bug: error adding a new record
     this.props.addRecord(hamster.id, {...this.state, hamsterId: hamster.id})
+    this.setState({
+      datetime: '',
+      foodId: null,
+      quantity: 0
+    })
   }
 
   render() {
@@ -62,6 +64,7 @@ export class TrackerList extends React.Component {
 
 const mapState = state => {
   return {
+    hamster: state.hamster.selectedHamster,
     allFood: state.food.allFood
   }
 }
