@@ -2,12 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {getAllFood} from '../store/food'
-import {
-  getRecords,
-  addRecord,
-  updateRecord,
-  removeRecord
-} from '../store/tracker'
+import {addRecord, updateRecord, removeRecord} from '../store/tracker'
 import {TrackerForm} from './index'
 
 export class TrackerList extends React.Component {
@@ -23,12 +18,11 @@ export class TrackerList extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
-    this.props.getRecords(this.props.hamster.id)
     this.props.getAllFood()
   }
 
   handleChange(evt) {
+    // bug: not a function
     evt.preventDefault()
     this.setState({
       [evt.target.name]: evt.target.value
@@ -44,9 +38,6 @@ export class TrackerList extends React.Component {
 
   render() {
     const {allFood, records} = this.props
-
-    // const foodItems = allFood.map((food) => `${food.brand} ${food.name}`).sort()
-    // const names = Array.from(new Set(allFood.map((food) => food.name))).sort()
 
     return (
       <div>
@@ -71,15 +62,13 @@ export class TrackerList extends React.Component {
 
 const mapState = state => {
   return {
-    allFood: state.food.allFood,
-    records: state.tracker.records
+    allFood: state.food.allFood
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     getAllFood: () => dispatch(getAllFood()),
-    getRecords: hamsterId => dispatch(getRecords(hamsterId)),
     addRecord: (hamsterId, recordInfo) =>
       dispatch(addRecord(hamsterId, recordInfo)),
     updateRecord: (recordId, updateInfo) =>

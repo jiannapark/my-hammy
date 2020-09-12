@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {getSingleHamster} from '../store/hamster'
 import {Tracker} from './index'
+import {getRecords} from '../store/tracker'
 
 export class Hamster extends React.Component {
   componentDidMount() {
     this.props.getSingleHamster(this.props.match.params.id)
+    this.props.getRecords(this.props.match.params.id)
   }
 
   render() {
-    const {hamster} = this.props
-    console.log('hamster', hamster)
+    const {hamster, records} = this.props
 
     return (
       <div>
@@ -21,7 +22,7 @@ export class Hamster extends React.Component {
         <h5>Species: {hamster.species}</h5>
 
         {/* Environment, Nutrition Tracker & Diary */}
-        <Tracker hamster={hamster} />
+        <Tracker records={records} />
       </div>
     )
   }
@@ -29,13 +30,15 @@ export class Hamster extends React.Component {
 
 const mapState = state => {
   return {
-    hamster: state.hamster.selectedHamster
+    hamster: state.hamster.selectedHamster,
+    records: state.tracker.records
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getSingleHamster: hamsterId => dispatch(getSingleHamster(hamsterId))
+    getSingleHamster: hamsterId => dispatch(getSingleHamster(hamsterId)),
+    getRecords: hamsterId => dispatch(getRecords(hamsterId))
   }
 }
 

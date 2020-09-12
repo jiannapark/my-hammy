@@ -26,6 +26,7 @@ export const gotSingleHamster = hamster => ({
 
 export const getSingleHamster = hamsterId => async dispatch => {
   try {
+    // if id different from localStorage
     const res = await axios.get(`/api/hamster/single/${hamsterId}`)
     dispatch(gotSingleHamster(res.data || initialState.selectedHamster))
   } catch (err) {

@@ -191,12 +191,19 @@ async function seedFood() {
   return foodItems
 }
 
-// async function seedTracker() {
-//   const trackerList = [{}]
+async function seedTracker() {
+  const trackerList = [
+    {
+      hamsterId: 1,
+      foodId: 1,
+      quantity: 0.5,
+      date: new Date(Date.now())
+    }
+  ]
 
-//   const trackers = await Tracker.bulkCreate(trackerList)
-//   return trackers
-// }
+  const trackers = await Tracker.bulkCreate(trackerList)
+  return trackers
+}
 
 async function seedDiary() {
   const entries = await Diary.bulkCreate([
@@ -223,14 +230,14 @@ async function seed() {
   const hamsters = await seedHamster()
   const environmentItems = await seedEnvironment()
   const foodItems = await seedFood()
-  // const trackers = await seedTracker()
+  const trackers = await seedTracker()
   const entries = await seedDiary()
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${hamsters.length} hamsters`)
   console.log(`seeded ${environmentItems.length} environment items`)
   console.log(`seeded ${foodItems.length} food items`)
-  // console.log(`seeded ${trackers.length} food tracker entries`)
+  console.log(`seeded ${trackers.length} food tracker entries`)
   console.log(`seeded ${entries.length} diary entries`)
   console.log(`seeded successfully`)
 }
