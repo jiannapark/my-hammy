@@ -52,11 +52,24 @@ export class TrackerList extends React.Component {
             handleSubmit={this.handleSubmit}
           />
         </div>
-        {records.map(record => (
-          <div key={record.id}>
-            <h4>{record.data}</h4>
-          </div>
-        ))}
+        {records.map(record => {
+          const food = record.food
+          const unit =
+            parseFloat(record.quantity) > 1
+              ? food.servingUnit + 's'
+              : food.servingUnit
+          return (
+            <div key={record.id}>
+              <h4>When: {record.date}</h4>
+              <div>Type: {food.type}</div>
+              <div>Brand: {food.brand}</div>
+              <div>Name: {food.name}</div>
+              <div>
+                Quantity: {record.quantity} {unit}
+              </div>
+            </div>
+          )
+        })}
       </div>
     )
   }
