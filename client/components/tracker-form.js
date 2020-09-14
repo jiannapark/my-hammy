@@ -17,7 +17,6 @@ export const TrackerForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        {/* bug: no change on change */}
         <label htmlFor="datetime">
           <small>Time</small>
         </label>

@@ -197,7 +197,19 @@ async function seedTracker() {
       hamsterId: 1,
       foodId: 1,
       quantity: 0.5,
-      date: new Date(Date.now())
+      date: new Date('2020-09-11T21:00:00Z')
+    },
+    {
+      hamsterId: 1,
+      foodId: 5,
+      quantity: 0.1,
+      date: new Date('2020-09-12T18:00:00Z')
+    },
+    {
+      hamsterId: 1,
+      foodId: 3,
+      quantity: 0.1,
+      date: new Date('2020-09-12T19:00:00Z')
     }
   ]
 
@@ -216,7 +228,21 @@ async function seedDiary() {
       date: new Date('2020-09-05T19:40:00Z'),
       weather: 'Sunny',
       content:
-        "Pepper didn't bite me today! To be more precise, he didn't succeed in biting me because I distracted him with treats. But really, as I was giving it a piece of carrot, he climbed onto my hands, and instead of biting my fingers he started climbing all over me! Brandon had to helped get him off my back because I was worried he might fall and get hurt."
+        "Pepper didn't bite me today! To be more precise, he didn't succeed in biting me because I distracted him with treats. But really, as I was giving it a piece of carrot, he climbed onto my hands, and instead of biting my fingers he started climbing all over me! Brandon had to helped get him off my back because I was worried he might fall and get hurt.",
+      weight: 30
+    },
+    {
+      date: new Date('2020-09-08T19:40:00Z'),
+      content:
+        "We turned our bathtub into Pepper's enclosure. We covered the bottom with a blanket then moved the cage into the tub with doors open. Pepper much prefers the large space he could now explore, with added wooden toys and bridges! He burrowed under the blanket and soon fell asleep there. When awake, he can use the ladder to go back to his cage where he can eat, drink, and run on the wheel.",
+      weight: 31
+    },
+    {
+      date: new Date('2020-09-14T11:00:00Z'),
+      weather: 'Cloudy',
+      content:
+        "Pepper overate over the weekend and now seem sluggish. I shouldn't have left that huge wheat spray. He seems to enjoy drinking water out of his tiny tealight candle holder more than the water bottle, as it probably feels more natural to him.",
+      weight: 33
     }
   ])
   return entries

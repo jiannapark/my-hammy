@@ -20,6 +20,12 @@ const Diary = db.define('diary', {
   content: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  weight: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0
+    }
   }
 })
 
