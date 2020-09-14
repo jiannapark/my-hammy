@@ -5,7 +5,6 @@ import {getItems} from '../store/environment'
 
 export class Environment extends React.Component {
   componentDidMount() {
-    // TODO: enable get all items without id
     this.props.getItems(this.props.hamster.id)
   }
 

@@ -12,7 +12,12 @@ export const gotItems = items => ({type: GET_ITEMS, items})
 
 export const getItems = hamsterId => async dispatch => {
   try {
-    const res = await axios.get(`/api/environment/${hamsterId}`)
+    let res
+    if (hamsterId) {
+      res = await axios.get(`/api/environment/${hamsterId}`)
+    } else {
+      res = await axios.get('/api/environment')
+    }
     dispatch(gotItems(res.data || initialState.items))
   } catch (err) {
     console.error('There was a problem fetching items!', err)
