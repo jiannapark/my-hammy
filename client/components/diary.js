@@ -40,7 +40,7 @@ export class Diary extends React.Component {
   }
 
   render() {
-    const {entries} = this.props
+    const {entries, removeEntry} = this.props
 
     return (
       <div>
@@ -58,6 +58,9 @@ export class Diary extends React.Component {
             <div>Weather: {entry.weather}</div>
             <div>Content: {entry.content}</div>
             <div>Weight: {entry.weight}g</div>
+            <button type="button" onClick={() => removeEntry(entry.id)}>
+              Delete
+            </button>
           </div>
         ))}
       </div>

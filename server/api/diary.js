@@ -53,7 +53,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete(':id', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const entryToDelete = await Diary.destroy({
       where: {
