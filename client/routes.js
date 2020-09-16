@@ -9,7 +9,8 @@ import {
   Hamster,
   Food,
   Environment,
-  Tracker
+  Tracker,
+  Diary
 } from './components'
 import {me} from './store'
 
@@ -28,9 +29,11 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route path="/home" component={UserHome} />
+            <Route path="/hamster/:id/diary" component={Diary} />
             <Route path="/hamster/:id" component={Hamster} />
             <Route path="/food" component={Food} />
             <Route path="/environment" component={Environment} />
+            {/* TODO: change tracker path to include hamsterId */}
             <Route path="/tracker" component={Tracker} />
           </Switch>
         )}

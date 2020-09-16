@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getSingleHamster} from '../store/hamster'
 import {Tracker} from './index'
 import {getRecords} from '../store/tracker'
@@ -23,6 +24,8 @@ export class Hamster extends React.Component {
         <h5>Species: {hamster.species}</h5>
 
         {/* Environment, Nutrition Tracker & Diary */}
+        <Link to={`/hamster/${hamster.id}/diary`}>Open Diary</Link>
+
         <Tracker records={records} />
       </div>
     )
