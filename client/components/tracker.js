@@ -39,7 +39,7 @@ export class TrackerList extends React.Component {
   }
 
   render() {
-    const {allFood, records} = this.props
+    const {allFood, records, removeRecord} = this.props
 
     return (
       <div>
@@ -67,6 +67,9 @@ export class TrackerList extends React.Component {
               <div>
                 Quantity: {record.quantity} {unit}
               </div>
+              <button type="button" onClick={() => removeRecord(record.id)}>
+                Delete
+              </button>
             </div>
           )
         })}

@@ -50,7 +50,7 @@ router.put('/:hamsterId', async (req, res, next) => {
 })
 
 // :(
-router.delete(':hamsterId', async (req, res, next) => {
+router.delete('/:hamsterId', async (req, res, next) => {
   try {
     const hamsterToDelete = await Hamster.destroy({
       where: {

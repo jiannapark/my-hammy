@@ -60,7 +60,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete(':id', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const environmentToDelete = await Environment.destroy({
       where: {
