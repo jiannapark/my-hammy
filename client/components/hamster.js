@@ -18,7 +18,7 @@ export class Hamster extends React.Component {
 
     return (
       <div>
-        <h3>{hamster.name}</h3>
+        <div className="title is-3">{hamster.name}</div>
         {/* TODO: imageUrl as absolute path */}
         <img src="/images/apple-slice-2.jpg" width="400" />
         <h5>Species: {hamster.species}</h5>

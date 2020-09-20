@@ -44,7 +44,7 @@ export class TrackerList extends React.Component {
     return (
       <div>
         <div>
-          <h3>Add New Record</h3>
+          <div className="title is-4">Add New Record</div>
           <TrackerForm
             foodItems={allFood}
             recordInfo={this.state}

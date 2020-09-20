@@ -78,7 +78,7 @@ const Navbar = ({handleClick, isLoggedIn, toggleMenuBurger}) => (
                   className="button is-primary"
                   onClick={toggleMenuBurger}
                 >
-                  Login
+                  <strong>Login</strong>
                 </Link>
                 <Link
                   to="/signup"

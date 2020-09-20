@@ -51,7 +51,7 @@ export class Food extends React.Component {
 
     return (
       <div>
-        <h3>Add Food Item</h3>
+        <div className="title is-4">Add Food Item</div>
         <FoodForm
           foodInfo={foodInfo}
           handleChange={this.handleChange}
@@ -66,7 +66,7 @@ export class Food extends React.Component {
               <img src={food.imageUrl} alt={food.name} width="200" />
               <button
                 type="button"
-                className="button is-light"
+                className="button is-light is-small"
                 onClick={() => this.props.removeFood(food.id)}
               >
                 Delete
