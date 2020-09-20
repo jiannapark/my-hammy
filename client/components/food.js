@@ -66,6 +66,7 @@ export class Food extends React.Component {
               <img src={food.imageUrl} alt={food.name} width="200" />
               <button
                 type="button"
+                className="button is-light"
                 onClick={() => this.props.removeFood(food.id)}
               >
                 Delete

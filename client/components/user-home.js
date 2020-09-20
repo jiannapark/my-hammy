@@ -16,7 +16,7 @@ export class UserHome extends React.Component {
       <div>
         <h3>Welcome, {email}</h3>
         <div>
-          Here are your hamsters:
+          Choose your hamster:
           {hamsters.map(hamster => (
             <Link to={`/hamster/${hamster.id}`} key={hamster.id}>
               <h5>{hamster.name}</h5>
