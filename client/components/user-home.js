@@ -10,11 +10,11 @@ export class UserHome extends React.Component {
   }
 
   render() {
-    const {email, hamsters} = this.props
+    const {name, hamsters} = this.props
 
     return (
       <div>
-        <h3>Welcome, {email}</h3>
+        <h3>Welcome, {name}</h3>
         <div>
           Choose your hamster:
           {hamsters.map(hamster => (
@@ -32,7 +32,7 @@ export class UserHome extends React.Component {
 const mapState = state => {
   return {
     userId: state.user.id,
-    email: state.user.email,
+    name: state.user.firstName,
     hamsters: state.hamster.hamsters
   }
 }
