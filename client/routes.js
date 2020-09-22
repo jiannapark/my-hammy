@@ -10,7 +10,8 @@ import {
   Food,
   Environment,
   Tracker,
-  Diary
+  Diary,
+  Dashboard
 } from './components'
 import {me} from './store'
 
@@ -35,6 +36,8 @@ class Routes extends Component {
             <Route path="/environment" component={Environment} />
             {/* TODO: change tracker path to include hamsterId */}
             <Route path="/tracker" component={Tracker} />
+            <Route path="/dashboard/:id" component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
