@@ -13,14 +13,27 @@ export class UserHome extends React.Component {
     const {name, hamsters} = this.props
 
     return (
-      <div>
-        <h3>Welcome, {name}</h3>
+      <div className="section">
+        <div className="title is-3">Welcome, {name}</div>
         <div>
-          Choose your hamster:
+          <div className="subtitle">Choose your hamster:</div>
           {hamsters.map(hamster => (
-            <Link to={`/hamster/${hamster.id}`} key={hamster.id}>
-              <h5>{hamster.name}</h5>
-              <img src={hamster.imageUrl} width="200" />
+            <Link
+              to={`/hamster/${hamster.id}`}
+              key={hamster.id}
+              className="box"
+              style={{display: 'flex'}}
+            >
+              <img
+                src={hamster.imageUrl}
+                width="200"
+                style={{marginRight: '1.5rem'}}
+              />
+              <div style={{alignSelf: 'center'}}>
+                <div className="title is-5">Name: {hamster.name}</div>
+                <div className="title is-6">Species: {hamster.species}</div>
+                <div>Bio: {hamster.bio}</div>
+              </div>
             </Link>
           ))}
         </div>
