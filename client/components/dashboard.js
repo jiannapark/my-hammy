@@ -16,8 +16,8 @@ export class Dashboard extends React.Component {
     const {hamsters} = this.props
 
     return (
-      <div>
-        <div>
+      <div className="section">
+        <div className="container">
           {/* sidemenu */}
           <h3>Dashboard</h3>
           {hamsters.map(hamster => (
@@ -27,7 +27,7 @@ export class Dashboard extends React.Component {
           ))}
         </div>
         {/* dashboard for the selected hamster */}
-        <div id="dashboard" />
+        <div className="container" id="dashboard" />
       </div>
     )
   }

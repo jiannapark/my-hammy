@@ -72,7 +72,7 @@ const Navbar = ({handleClick, isLoggedIn, toggleMenuBurger}) => (
               Environment
             </Link>
             <div className="navbar-item">
-              <div className="buttons">
+              <div className="buttons" style={{marginBottom: 0}}>
                 <Link
                   to="/login"
                   className="button is-primary"
