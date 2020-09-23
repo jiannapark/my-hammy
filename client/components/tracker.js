@@ -42,8 +42,8 @@ export class TrackerList extends React.Component {
     const {allFood, records, removeRecord} = this.props
 
     return (
-      <div>
-        <div>
+      <div className="section">
+        <div className="container">
           <div className="title is-4">Add New Record</div>
           <TrackerForm
             foodItems={allFood}
@@ -52,27 +52,33 @@ export class TrackerList extends React.Component {
             handleSubmit={this.handleSubmit}
           />
         </div>
-        {records.map(record => {
-          const food = record.food
-          const unit =
-            parseFloat(record.quantity) > 1
-              ? food.servingUnit + 's'
-              : food.servingUnit
-          return (
-            <div key={record.id}>
-              <h4>When: {record.date}</h4>
-              <div>Type: {food.type}</div>
-              <div>Brand: {food.brand}</div>
-              <div>Name: {food.name}</div>
-              <div>
-                Quantity: {record.quantity} {unit}
+        <div className="container">
+          {records.map(record => {
+            const food = record.food
+            const unit =
+              parseFloat(record.quantity) > 1
+                ? food.servingUnit + 's'
+                : food.servingUnit
+            return (
+              <div key={record.id} className="block">
+                <h4>When: {record.date}</h4>
+                <div>Type: {food.type}</div>
+                <div>Brand: {food.brand}</div>
+                <div>Name: {food.name}</div>
+                <div>
+                  Quantity: {record.quantity} {unit}
+                </div>
+                <button
+                  type="button"
+                  className="delete"
+                  onClick={() => removeRecord(record.id)}
+                >
+                  Delete
+                </button>
               </div>
-              <button type="button" onClick={() => removeRecord(record.id)}>
-                Delete
-              </button>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     )
   }

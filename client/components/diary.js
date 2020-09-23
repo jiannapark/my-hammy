@@ -43,26 +43,32 @@ export class Diary extends React.Component {
     const {entries, removeEntry} = this.props
 
     return (
-      <div>
-        <div>
-          <h3>Add New Entry</h3>
+      <div className="section">
+        <div className="container">
+          <div className="title is-4">Add New Entry</div>
           <DiaryForm
             entryInfo={this.state}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
         </div>
-        {entries.map(entry => (
-          <div key={entry.id}>
-            <h4>Date: {entry.date}</h4>
-            <div>Weather: {entry.weather}</div>
-            <div>Content: {entry.content}</div>
-            <div>Weight: {entry.weight}g</div>
-            <button type="button" onClick={() => removeEntry(entry.id)}>
-              Delete
-            </button>
-          </div>
-        ))}
+        <div className="container">
+          {entries.map(entry => (
+            <div key={entry.id} className="block">
+              <h4>Date: {entry.date}</h4>
+              <div>Weather: {entry.weather}</div>
+              <div>Content: {entry.content}</div>
+              <div>Weight: {entry.weight}g</div>
+              <button
+                type="button"
+                className="delete"
+                onClick={() => removeEntry(entry.id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

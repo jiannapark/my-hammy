@@ -17,11 +17,10 @@ export class Hamster extends React.Component {
     const {hamster, records} = this.props
 
     return (
-      <div>
+      <div className="section">
         <div className="title is-3">{hamster.name}</div>
         {/* TODO: imageUrl as absolute path */}
         <img src="/images/apple-slice-2.jpg" width="400" />
-        <h5>Species: {hamster.species}</h5>
 
         {/* Environment, Nutrition Tracker & Diary */}
         <Link to={`/hamster/${hamster.id}/diary`}>Open Diary</Link>

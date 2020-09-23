@@ -50,7 +50,7 @@ export class Food extends React.Component {
     const foodInfo = this.state
 
     return (
-      <div>
+      <div className="section">
         <div className="title is-4">Add Food Item</div>
         <FoodForm
           foodInfo={foodInfo}

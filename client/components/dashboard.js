@@ -16,8 +16,11 @@ export class Dashboard extends React.Component {
     const {hamsters} = this.props
 
     return (
-      <div className="section">
-        <div className="container">
+      <div className="section" style={{display: 'flex'}}>
+        <div
+          className="container"
+          // style={{width: '135px'}}
+        >
           {/* sidemenu */}
           <h3>Dashboard</h3>
           {hamsters.map(hamster => (
@@ -26,8 +29,14 @@ export class Dashboard extends React.Component {
             </Link>
           ))}
         </div>
+
         {/* dashboard for the selected hamster */}
-        <div className="container" id="dashboard" />
+        <div className="container" id="dashboard" style={{flexGrow: 7}}>
+          <div className="box">box 1</div>
+          <div className="box">box 2</div>
+          <div className="box">box 3</div>
+          <div className="box">box 4</div>
+        </div>
       </div>
     )
   }

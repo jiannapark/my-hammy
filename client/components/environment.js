@@ -12,11 +12,12 @@ export class Environment extends React.Component {
     const {items} = this.props
 
     return (
-      <div>
+      <div className="section">
+        <div className="title is-4">Add Environment Item</div>
         {items.map(item => (
           <div key={item.id}>
-            <h4>{item.name}</h4>
             <h5>{item.brand}</h5>
+            <h4>{item.name}</h4>
             <img src={item.imageUrl} alt={item.name} width="200" />
           </div>
         ))}

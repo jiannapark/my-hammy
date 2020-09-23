@@ -19,3 +19,11 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.section {
+  /* background-color: #f8c6cf; */
+}
+
+.block:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
