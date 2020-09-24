@@ -19,9 +19,14 @@ export class Dashboard extends React.Component {
       <div className="section" style={{display: 'flex'}}>
         <div
           className="container"
-          // style={{width: '135px'}}
+          style={
+            {
+              // backgroundColor: '#eff0eb',
+              // width: '135px'
+            }
+          }
         >
-          {/* sidemenu */}
+          {/* select a hamster */}
           <h3>Dashboard</h3>
           {hamsters.map(hamster => (
             <Link to={`/dashboard/${hamster.id}`} key={hamster.id}>
@@ -31,11 +36,17 @@ export class Dashboard extends React.Component {
         </div>
 
         {/* dashboard for the selected hamster */}
-        <div className="container" id="dashboard" style={{flexGrow: 7}}>
-          <div className="box">box 1</div>
-          <div className="box">box 2</div>
-          <div className="box">box 3</div>
-          <div className="box">box 4</div>
+        <div
+          className="container"
+          id="dashboard"
+          style={{flexGrow: 7, display: 'flex', flexWrap: 'wrap'}}
+        >
+          <div className="box dashboard-card">box 1</div>
+          <div className="box dashboard-card">box 2</div>
+          <div className="box dashboard-card">box 3</div>
+          <div className="box dashboard-card" style={{marginBottom: '1.5rem'}}>
+            box 4
+          </div>
         </div>
       </div>
     )
