@@ -27,7 +27,7 @@ export class UserHome extends React.Component {
               <img
                 src={hamster.imageUrl}
                 width="200"
-                style={{marginRight: '1.5rem'}}
+                style={{marginRight: '1.5rem', borderRadius: '50%'}}
               />
               <div style={{alignSelf: 'center'}}>
                 <div className="title is-5">Name: {hamster.name}</div>

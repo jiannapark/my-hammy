@@ -26,7 +26,7 @@ export class Hamster extends React.Component {
           <img
             src="/images/apple-slice-2.jpg"
             width="400"
-            style={{margin: 'auto'}}
+            style={{margin: 'auto', borderRadius: '50%'}}
           />
         </div>
 
