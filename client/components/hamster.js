@@ -22,8 +22,17 @@ export class Hamster extends React.Component {
         {/* TODO: imageUrl as absolute path */}
         <img src="/images/apple-slice-2.jpg" width="400" />
 
-        {/* Environment, Nutrition Tracker & Diary */}
-        <Link to={`/hamster/${hamster.id}/diary`}>Open Diary</Link>
+        {/* Current environment, Nutrition Tracker & Diary & Media in Tabs */}
+        <div className="tabs is-centered">
+          <ul>
+            <li>Currently Using</li>
+            <li>Food Tracker</li>
+            <li>
+              <Link to={`/hamster/${hamster.id}/diary`}>Diary</Link>
+            </li>
+            <li>Photo Album</li>
+          </ul>
+        </div>
 
         <Tracker records={records} />
       </div>
