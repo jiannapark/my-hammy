@@ -18,9 +18,17 @@ export class Hamster extends React.Component {
 
     return (
       <div className="section">
-        <div className="title is-3">{hamster.name}</div>
+        <div className="title is-3" style={{textAlign: 'center'}}>
+          {hamster.name}
+        </div>
         {/* TODO: imageUrl as absolute path */}
-        <img src="/images/apple-slice-2.jpg" width="400" />
+        <div style={{width: '100%', display: 'flex', marginBottom: '1.5rem'}}>
+          <img
+            src="/images/apple-slice-2.jpg"
+            width="400"
+            style={{margin: 'auto'}}
+          />
+        </div>
 
         {/* Current environment, Nutrition Tracker & Diary & Media in Tabs */}
         <div className="tabs is-centered">
