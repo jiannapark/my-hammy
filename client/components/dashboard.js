@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getHamsters} from '../store/hamster'
+import {WeightGraph} from './index'
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -41,7 +42,9 @@ export class Dashboard extends React.Component {
           id="dashboard"
           style={{flexGrow: 7, display: 'flex', flexWrap: 'wrap'}}
         >
-          <div className="box dashboard-card">box 1</div>
+          <div className="box dashboard-card">
+            box 1 <WeightGraph />
+          </div>
           <div className="box dashboard-card">box 2</div>
           <div className="box dashboard-card">box 3</div>
           <div className="box dashboard-card" style={{marginBottom: '1.5rem'}}>
