@@ -18,8 +18,7 @@ const Diary = db.define('diary', {
     )
   },
   content: {
-    type: Sequelize.TEXT,
-    allowNull: false
+    type: Sequelize.TEXT
   },
   weight: {
     type: Sequelize.INTEGER,

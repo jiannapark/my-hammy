@@ -2,6 +2,20 @@ const router = require('express').Router()
 const {Diary} = require('../db/models')
 module.exports = router
 
+router.get('/:hamsterId/weight', async (req, res, next) => {
+  try {
+    const weights = await Diary.findAll({
+      where: {
+        hamsterId: req.params.hamsterId
+      },
+      attributes: ['date', 'weight']
+    })
+    res.json(weights)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:hamsterId', async (req, res, next) => {
   try {
     const diaryEntries = await Diary.findAll({

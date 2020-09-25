@@ -36,6 +36,46 @@ async function seedDiary() {
       content:
         "Pepper overate over the weekend and now seem sluggish. I shouldn't have left that huge wheat spray. He seems to enjoy drinking water out of his tiny tealight candle holder more than the water bottle, as it probably feels more natural to him.",
       weight: 33
+    },
+    {
+      date: new Date('2020-09-15T11:00:00Z'),
+      hamsterId: 1,
+      weight: 32
+    },
+    {
+      date: new Date('2020-09-18T11:00:00Z'),
+      hamsterId: 1,
+      weight: 33
+    },
+    {
+      date: new Date('2020-09-20T11:00:00Z'),
+      hamsterId: 1,
+      weight: 37
+    },
+    {
+      date: new Date('2020-09-21T11:00:00Z'),
+      hamsterId: 1,
+      weight: 37
+    },
+    {
+      date: new Date('2020-09-22T11:00:00Z'),
+      hamsterId: 1,
+      weight: 38
+    },
+    {
+      date: new Date('2020-09-23T11:00:00Z'),
+      hamsterId: 1,
+      weight: 36
+    },
+    {
+      date: new Date('2020-09-24T11:00:00Z'),
+      hamsterId: 1,
+      weight: 38
+    },
+    {
+      date: new Date('2020-09-25T11:00:00Z'),
+      hamsterId: 1,
+      weight: 39
     }
   ])
   return entries
