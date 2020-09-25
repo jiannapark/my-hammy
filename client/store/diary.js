@@ -2,11 +2,17 @@ import axios from 'axios'
 
 const GET_ENTRIES = 'GET_ENTRIES'
 const GET_SINGLE_ENTRY = 'GET_SINGLE_ENTRY'
+const GET_WEIGHT = 'GET_WEIGHT'
 const ADD_ENTRY = 'ADD_ENTRY'
 const UPDATE_ENTRY = 'UPDATE_ENTRY'
 const REMOVE_ENTRY = 'REMOVE_ENTRY'
 
-const initialState = {loading: true, entries: [], selectedEntry: {}}
+const initialState = {
+  loading: true,
+  entries: [],
+  selectedEntry: {},
+  weights: []
+}
 
 export const gotEntries = entries => ({type: GET_ENTRIES, entries})
 
@@ -27,6 +33,17 @@ export const getSingleEntry = entryId => async dispatch => {
     dispatch(gotSingleEntry(res.data || initialState.selectedEntry))
   } catch (err) {
     console.error('There was a problem fetching single diary entry!', err)
+  }
+}
+
+export const gotWeights = weights => ({type: GET_WEIGHT, weights})
+
+export const getWeights = hamsterId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/diary/${hamsterId}/weight`)
+    dispatch(gotWeights(res.data || initialState.entries))
+  } catch (err) {
+    console.error('There was a problem fetching weights!', err)
   }
 }
 
@@ -73,6 +90,8 @@ export default function diaryReducer(state = initialState, action) {
       return {...state, loading: false, entries: action.entries}
     case GET_SINGLE_ENTRY:
       return {...state, loading: false, selectedEntry: action.entry}
+    case GET_WEIGHT:
+      return {...state, loading: false, weights: action.weights}
     case ADD_ENTRY:
       return {
         ...state,
