@@ -1,17 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getWeights} from '../store/diary'
+import moment from 'moment'
 
 export class WeightGraph extends React.Component {
   componentDidMount() {
-    this.props.getWeights(this.props.hamsterId)
+    this.props.getWeights(1)
+    // this.props.getWeights(this.props.hamsterId)
     // const hamsterId = this.props.match.params.id
   }
 
   render() {
     const {weights} = this.props
 
-    return <div>{weights}</div>
+    return weights.map(weight => (
+      <div key={weight.date}>
+        <div>Date: {moment(weight.date).format('MM-DD-YYYY')}</div>
+        <div>Weight: {weight.weight}</div>
+      </div>
+    ))
   }
 }
 
