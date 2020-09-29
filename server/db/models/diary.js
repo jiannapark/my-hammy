@@ -4,7 +4,7 @@ const db = require('../db')
 const Diary = db.define('diary', {
   date: {
     type: Sequelize.DATE,
-    defaultValue: new Date(Date.now()).toString()
+    defaultValue: new Date(Date.now())
   },
   weather: {
     type: Sequelize.ENUM(
