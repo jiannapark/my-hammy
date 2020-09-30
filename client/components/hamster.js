@@ -35,6 +35,9 @@ export class Hamster extends React.Component {
         {/* Current environment, Nutrition Tracker & Diary & Media in Tabs */}
         <div className="tabs is-centered">
           <ul>
+            <li>
+              <Link to={`/dashboard/${hamster.id}`}>Dashboard</Link>
+            </li>
             <li>Currently Using</li>
             <li>Food Tracker</li>
             <li>
