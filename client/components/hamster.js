@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getSingleHamster} from '../store/hamster'
+import {getWeights} from '../store/diary'
 import {Tracker} from './index'
 import {getRecords} from '../store/tracker'
 
@@ -10,6 +11,7 @@ export class Hamster extends React.Component {
   componentDidMount() {
     const hamsterId = this.props.match.params.id
     this.props.getSingleHamster(hamsterId)
+    this.props.getWeights(hamsterId)
     this.props.getRecords(hamsterId)
   }
 
@@ -58,7 +60,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getSingleHamster: hamsterId => dispatch(getSingleHamster(hamsterId)),
-    getRecords: hamsterId => dispatch(getRecords(hamsterId))
+    getRecords: hamsterId => dispatch(getRecords(hamsterId)),
+    getWeights: hamsterId => dispatch(getWeights(hamsterId))
   }
 }
 

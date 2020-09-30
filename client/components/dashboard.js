@@ -3,18 +3,21 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getHamsters} from '../store/hamster'
+import {getWeights} from '../store/diary'
 import {WeightGraph} from './index'
 
 export class Dashboard extends React.Component {
   componentDidMount() {
     this.props.getHamsters(this.props.userId)
-    // const hamsterId = this.props.match.params.id
-    // if hamsterId, show that hamster's dashboard
-    // otherwise, default to hamster #1
+
+    const hamsterId = this.props.match.params.id
+      ? this.props.match.params.id
+      : 1
+    this.props.getWeights(hamsterId)
   }
 
   render() {
-    const {hamsters} = this.props
+    const {hamsters, weights} = this.props
 
     return (
       <div className="section" style={{display: 'flex'}}>
@@ -43,7 +46,7 @@ export class Dashboard extends React.Component {
           style={{flexGrow: 7, display: 'flex', flexWrap: 'wrap'}}
         >
           <div className="box dashboard-card">
-            box 1 <WeightGraph />
+            box 1 <WeightGraph weights={weights} />
           </div>
           <div className="box dashboard-card">box 2</div>
           <div className="box dashboard-card">box 3</div>
@@ -59,13 +62,15 @@ export class Dashboard extends React.Component {
 const mapState = state => {
   return {
     userId: state.user.id,
-    hamsters: state.hamster.hamsters
+    hamsters: state.hamster.hamsters,
+    weights: state.diary.weights
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getHamsters: userId => dispatch(getHamsters(userId))
+    getHamsters: userId => dispatch(getHamsters(userId)),
+    getWeights: hamsterId => dispatch(getWeights(hamsterId))
   }
 }
 

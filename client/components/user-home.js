@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getHamsters} from '../store/hamster'
+import {getWeights} from '../store/diary'
 
 export class UserHome extends React.Component {
   componentDidMount() {
     this.props.getHamsters(this.props.userId)
+    this.props.getWeights()
   }
 
   render() {
@@ -52,7 +54,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getHamsters: userId => dispatch(getHamsters(userId))
+    getHamsters: userId => dispatch(getHamsters(userId)),
+    getWeights: hamsterId => dispatch(getWeights(hamsterId))
   }
 }
 
