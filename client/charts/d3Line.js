@@ -3,13 +3,11 @@ import {
   max,
   axisLeft,
   axisBottom,
-  format,
-  timeFormat,
   scaleTime,
   scaleLinear,
-  line as d3Line
+  line,
+  curveNatural
 } from 'd3'
-// import moment from 'moment'
 
 const weightsData = JSON.parse(window.localStorage.getItem('weightsData'))
 const dateArray = weightsData.map(weight => weight.date)
@@ -17,13 +15,16 @@ const weightArray = weightsData.map(weight => weight.weight)
 
 const xScale = scaleTime()
   .domain([new Date(dateArray[0]), new Date()])
-  .range([0, 100])
-const yScale = scaleLinear()
-  .domain([20, max(weightArray)])
-  .range([100, 0])
+  .range([0, 700])
+  .nice()
 
-const scaleXData = point => xScale(new Date(point.date))
-const scaleYData = point => yScale(point.weight)
+const yScale = scaleLinear()
+  .domain([0, max(weightArray) + 50])
+  .range([150, 0])
+  .nice()
+
+const scaleXData = d => xScale(new Date(d.date))
+const scaleYData = d => yScale(d.weight)
 
 const xAxis = axisBottom(xScale)
 const yAxis = axisLeft(yScale)
@@ -32,6 +33,7 @@ const buildAxes = () => {
   select('#weight-chart')
     .append('g')
     .attr('class', 'line-chart-yaxis')
+
   select('#weight-chart')
     .append('g')
     .attr('class', 'line-chart-xaxis')
@@ -41,6 +43,8 @@ const buildLine = () => {
   select('#weight-chart')
     .append('path')
     .attr('class', 'line-chart-line')
+    .attr('fill', 'none')
+    .attr('stroke', '#999')
 }
 
 const drawAxes = () => {
@@ -49,23 +53,38 @@ const drawAxes = () => {
 }
 
 const drawLine = data => {
-  const line = d3Line()
+  const lineGenerator = line()
     .x(scaleXData)
     .y(scaleYData)
-  select('.line-chart-line').attr('d', line(data))
+    .curve(curveNatural)
+
+  select('.line-chart-line').attr('d', lineGenerator(data))
+}
+
+const drawCircle = data => {
+  select('svg')
+    .selectAll('circle')
+    .data(data)
+    .enter()
+    .append('circle')
+    .attr('cx', d => xScale(new Date(d.date)))
+    .attr('cy', d => yScale(d.weight))
+    .attr('r', 3)
+    .attr('fill', 'none')
+    .attr('stroke', '#aaa')
 }
 
 const renderChanges = data => {
   // const filteredData = weights.filter((d) => d.weight)
   drawAxes()
-  // console.log(filteredData)
+  drawCircle(data)
   drawLine(data)
 }
 
-d3Line.initializeChart = data => {
+const initializeChart = data => {
   buildAxes()
   buildLine()
   renderChanges(data)
 }
 
-export default d3Line
+export default initializeChart
