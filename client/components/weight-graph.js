@@ -5,6 +5,8 @@ import initializeChart from '../charts/d3Line'
 export class WeightGraph extends React.Component {
   componentDidMount() {
     const weightsData = JSON.parse(window.localStorage.getItem('weightsData'))
+    // only show last 7 days?
+    // const partialData = weightsData.slice(6)
     initializeChart(weightsData)
   }
 
