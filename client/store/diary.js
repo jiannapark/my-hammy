@@ -43,6 +43,7 @@ export const getWeights = hamsterId => async dispatch => {
     // if this thunk is never called (i.e. user does not select a single hamster) and user goes to dashboard, state.diary.weights is empty and can't be passed down onComponentMount in weight-graph --> save hamsterId 1's weights in localStorage from the start of the app, and change if selected hamster changes
     hamsterId = hamsterId ? hamsterId : 1
     const res = await axios.get(`/api/diary/${hamsterId}/weight`)
+    window.localStorage.removeItem('weightsData')
     window.localStorage.setItem('weightsData', JSON.stringify(res.data))
     dispatch(gotWeights(res.data || initialState.entries))
   } catch (err) {
