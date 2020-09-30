@@ -28,7 +28,6 @@ export const getSingleHamster = hamsterId => async dispatch => {
   try {
     // if id different from localStorage
     const res = await axios.get(`/api/hamster/single/${hamsterId}`)
-    // if this thunk is never called (i.e. user does not select a single hamster) and user goes to dashboard, state.diary.weights is empty and can't be passed down onComponentMount in weight-graph --> save hamsterId 1's weights in localStorage from the start, and change if selected hamster changes
     dispatch(gotSingleHamster(res.data || initialState.selectedHamster))
   } catch (err) {
     console.error('There was a problem fetching a hamster!', err)
