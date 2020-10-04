@@ -10,10 +10,6 @@ export class WeightGraph extends React.Component {
     initializeChart(weightsData)
   }
 
-  componentDidUpdate(prevProps) {}
-
-  componentWillUnmount() {}
-
   render() {
     return (
       <svg
