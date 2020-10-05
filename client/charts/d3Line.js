@@ -77,12 +77,17 @@ const drawLine = data => {
     .attr('d', lineGenerator(data))
 }
 
+const missingLineGenerator = line()
+  .x(scaleXData)
+  .y(scaleYData)
+  .curve(curveCardinal)
+
 const drawMissingLine = data => {
-  select('line-chart-missing-line')
+  select('.line-chart-missing-line')
     // .datum(data)
     .attr('fill', 'none')
     .attr('stroke', '#999')
-    .attr('d', lineGenerator(data))
+    .attr('d', missingLineGenerator(data))
 }
 
 const drawCircle = data => {
