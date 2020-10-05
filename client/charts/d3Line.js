@@ -6,7 +6,9 @@ import {
   scaleTime,
   scaleLinear,
   line as d3Line,
-  curveCardinal
+  curveCardinal,
+  symbol,
+  symbolStar
 } from 'd3'
 
 const height = 250
@@ -85,24 +87,31 @@ const drawMissingLine = data => {
     .attr('d', line)
 }
 
-const drawCircle = data => {
+const drawStar = data => {
+  const star = symbol()
+    .type(symbolStar)
+    .size(30)
+
   select('svg')
-    // .selectAll('circle')
+    .selectAll('.star')
     .data(data.filter(d => d.weight))
     .enter()
-    .append('star')
-    .attr('cx', d => xScale(new Date(d.date)))
-    .attr('cy', d => yScale(d.weight))
-    .attr('r', 3)
-    .attr('fill', 'none')
+    .append('path')
+    .attr('class', 'star')
+    .attr('fill', 'pink')
     .attr('stroke', '#aaa')
+    .attr(
+      'transform',
+      d => `translate(${xScale(new Date(d.date))}, ${yScale(d.weight)})`
+    )
+    .attr('d', star)
 }
 
 const renderChanges = data => {
   drawAxes()
   drawMissingLine(data)
   drawLine(data)
-  drawCircle(data)
+  drawStar(data)
 }
 
 const initializeChart = data => {
