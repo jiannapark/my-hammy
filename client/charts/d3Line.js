@@ -35,19 +35,22 @@ const scaleYData = d => yScale(d.weight)
 const buildAxes = () => {
   select('#weight-chart')
     .append('g')
-    .attr('class', 'line-chart-yaxis')
+    .attr('class', 'line-chart-xaxis')
   select('#weight-chart')
     .append('g')
-    .attr('class', 'line-chart-xaxis')
+    .attr('class', 'line-chart-yaxis')
 }
 
 const buildLine = () => {
   select('#weight-chart')
     .append('path')
-    // .datum(data.filter(line.defined()))
     .attr('class', 'line-chart-line')
-    .attr('fill', 'none')
-    .attr('stroke', '#999')
+}
+
+const buildMissingLine = () => {
+  select('#weight-chart')
+    .append('path')
+    .attr('class', 'line-chart-missing-line')
 }
 
 const drawAxes = () => {
@@ -60,19 +63,32 @@ const drawAxes = () => {
     .call(axisLeft(yScale))
 }
 
+const lineGenerator = line()
+  .defined(d => d.weight)
+  .x(scaleXData)
+  .y(scaleYData)
+  .curve(curveCardinal)
+
 const drawLine = data => {
-  const lineGenerator = line()
-    .defined(d => d.weight)
-    .x(scaleXData)
-    .y(scaleYData)
-    .curve(curveCardinal)
-  select('.line-chart-line').attr('d', lineGenerator(data))
+  select('.line-chart-line')
+    // .datum(data.filter((d) => d.weight))
+    .attr('fill', 'none')
+    .attr('stroke', 'steelblue')
+    .attr('d', lineGenerator(data))
+}
+
+const drawMissingLine = data => {
+  select('line-chart-missing-line')
+    // .datum(data)
+    .attr('fill', 'none')
+    .attr('stroke', '#999')
+    .attr('d', lineGenerator(data))
 }
 
 const drawCircle = data => {
   select('svg')
     .selectAll('circle')
-    .data(data)
+    .data(data.filter(d => d.weight))
     .enter()
     .append('circle')
     .attr('cx', d => xScale(new Date(d.date)))
@@ -87,6 +103,7 @@ const renderChanges = data => {
   drawAxes()
   drawCircle(data)
   drawLine(data)
+  drawMissingLine(data)
 }
 
 const initializeChart = data => {
@@ -94,6 +111,7 @@ const initializeChart = data => {
   // TODO: scale & box sizing
   buildAxes()
   buildLine()
+  buildMissingLine()
   renderChanges(data)
 }
 
