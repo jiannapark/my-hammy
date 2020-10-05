@@ -5,8 +5,7 @@ import {
   axisBottom,
   scaleTime,
   scaleLinear,
-  line,
-  curveNatural,
+  line as d3Line,
   curveCardinal
 } from 'd3'
 
@@ -41,18 +40,6 @@ const buildAxes = () => {
     .attr('class', 'line-chart-yaxis')
 }
 
-const buildLine = () => {
-  select('#weight-chart')
-    .append('path')
-    .attr('class', 'line-chart-line')
-}
-
-const buildMissingLine = () => {
-  select('#weight-chart')
-    .append('path')
-    .attr('class', 'line-chart-missing-line')
-}
-
 const drawAxes = () => {
   select('.line-chart-xaxis')
     .attr('transform', `translate(0, ${height - margin.bottom})`)
@@ -63,7 +50,24 @@ const drawAxes = () => {
     .call(axisLeft(yScale))
 }
 
-const lineGenerator = line()
+const buildLine = () => {
+  select('#weight-chart')
+    .append('path')
+    .attr('fill', 'none')
+    .attr('stroke', '#ce67ab')
+    .attr('stroke-width', 1.5)
+    .attr('class', 'line-chart-line')
+}
+
+const buildMissingLine = () => {
+  select('#weight-chart')
+    .append('path')
+    .attr('fill', 'none')
+    .attr('stroke', '#ccc')
+    .attr('class', 'line-chart-missing-line')
+}
+
+const line = d3Line()
   .defined(d => d.weight)
   .x(scaleXData)
   .y(scaleYData)
@@ -71,31 +75,22 @@ const lineGenerator = line()
 
 const drawLine = data => {
   select('.line-chart-line')
-    // .datum(data.filter((d) => d.weight))
-    .attr('fill', 'none')
-    .attr('stroke', 'steelblue')
-    .attr('d', lineGenerator(data))
+    .datum(data)
+    .attr('d', line)
 }
-
-const missingLineGenerator = line()
-  .x(scaleXData)
-  .y(scaleYData)
-  .curve(curveCardinal)
 
 const drawMissingLine = data => {
   select('.line-chart-missing-line')
-    // .datum(data)
-    .attr('fill', 'none')
-    .attr('stroke', '#999')
-    .attr('d', missingLineGenerator(data))
+    .datum(data.filter(line.defined()))
+    .attr('d', line)
 }
 
 const drawCircle = data => {
   select('svg')
-    .selectAll('circle')
+    // .selectAll('circle')
     .data(data.filter(d => d.weight))
     .enter()
-    .append('circle')
+    .append('star')
     .attr('cx', d => xScale(new Date(d.date)))
     .attr('cy', d => yScale(d.weight))
     .attr('r', 3)
@@ -104,19 +99,16 @@ const drawCircle = data => {
 }
 
 const renderChanges = data => {
-  // const filteredData = weights.filter((d) => d.weight)
   drawAxes()
-  drawCircle(data)
-  drawLine(data)
   drawMissingLine(data)
+  drawLine(data)
+  drawCircle(data)
 }
 
 const initializeChart = data => {
-  // TODO: draw except for undefined/null data points
-  // TODO: scale & box sizing
   buildAxes()
-  buildLine()
   buildMissingLine()
+  buildLine()
   renderChanges(data)
 }
 
