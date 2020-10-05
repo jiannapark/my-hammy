@@ -44,6 +44,7 @@ const buildAxes = () => {
 const buildLine = () => {
   select('#weight-chart')
     .append('path')
+    // .datum(data.filter(line.defined()))
     .attr('class', 'line-chart-line')
     .attr('fill', 'none')
     .attr('stroke', '#999')
@@ -61,6 +62,7 @@ const drawAxes = () => {
 
 const drawLine = data => {
   const lineGenerator = line()
+    .defined(d => d.weight)
     .x(scaleXData)
     .y(scaleYData)
     .curve(curveCardinal)
